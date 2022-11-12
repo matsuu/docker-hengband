@@ -29,7 +29,7 @@ jobs:
           flavor: |
             latest=true
           tags: |
-            type=semver,pattern={{version}}
+            type=match,pattern=v(.*),group=1
       - uses: docker/build-push-action@v3
         with:
           context: .
