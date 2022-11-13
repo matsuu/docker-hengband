@@ -1,22 +1,39 @@
 matsuu/hengband
-==============
+===============
 
 Dockerfile for 変愚蛮怒(hengband)
 
-## Usage
-
-### Images
+## Container Image
 
 * Docker Hub [matsuu/hengband](https://hub.docker.com/r/matsuu/hengband/)
 * GitHub Container Registry [ghcr.io/matsuu/hengband](https://github.com/matsuu/docker-nethack/pkgs/container/hengband)
 
-### Run
+## Usage
+
+### tty
 
     docker run -it matsuu/hengband
 
-### Build
+### x11
 
-    docker build -t matsuu/hengband .
+    xhost +
+    docker run -it matsuu/hengband -mx11
+
+fontsize 24pt:
+
+    docker run -it -e ANGBAND_X11_FONT=monospace-24 matsuu/hengband -mx11
+
+### Help
+
+    docker run -it --rm matsuu/hengband --help
+
+
+## Build-It-Yourself
+
+    git clone https://github.com/matsuu/docker-hengband.git
+    cd docker-hengband
+    docker build -t hengband .
+    docker run -it hengband
 
 ## References
 
