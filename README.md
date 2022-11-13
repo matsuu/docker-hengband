@@ -10,6 +10,8 @@ Dockerfile for 変愚蛮怒(hengband)
 
 ## Usage
 
+    docker pull matsuu/hengband:latest
+
 ### tty
 
     docker run -it matsuu/hengband
@@ -17,16 +19,15 @@ Dockerfile for 変愚蛮怒(hengband)
 ### x11
 
     xhost +
-    docker run -it matsuu/hengband -mx11
+    docker run -d matsuu/hengband -mx11
 
 fontsize 24pt:
 
-    docker run -it -e ANGBAND_X11_FONT=monospace-24 matsuu/hengband -mx11
+    docker run -d -e ANGBAND_X11_FONT=monospace-24 matsuu/hengband -mx11
 
 ### Help
 
-    docker run -it --rm matsuu/hengband --help
-
+    docker run --rm matsuu/hengband --help
 
 ## Build-It-Yourself
 
