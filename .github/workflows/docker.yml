@@ -39,3 +39,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha,scope=hengband
           cache-to: type=gha,mode=max,scope=hengband
+      - uses: peter-evans/dockerhub-description@v3
+        if: github.ref_type == 'tag'
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ github.repository_owner }}/hengband
