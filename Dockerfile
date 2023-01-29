@@ -1,6 +1,6 @@
 FROM alpine:3.16
 
-ARG TAG=3.0.0Alpha72
+ARG TAG=3.0.0Alpha75
 
 RUN \
   apk add libcurl libstdc++ libxft ncurses && \
