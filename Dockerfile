@@ -1,6 +1,6 @@
-FROM alpine:3.16
+FROM alpine:3.21
 
-ARG TAG=3.0.0Alpha76
+ARG TAG=3.0.1.26-Beta
 
 RUN \
   apk add libcurl libstdc++ libxft ncurses && \
@@ -10,13 +10,13 @@ RUN \
     cd hengband && \
     sed -i -e 's/NKF/ICONV/g' -e 's/nkf/gnu-iconv/g' configure.ac && \
     sed -i -e 's/nkf -e/gnu-iconv -c -f utf-8 -t euc-jp/' src/gcc-wrap && \
+    sed -i -e '/chown/s/root\./root:/' lib/*/Makefile.am && \
     ./bootstrap && \
     ./configure --enable-xft --prefix=/usr --with-setgid=games && \
     make && \
     make install \
   ) && \
   rm -rf hengband && \
-  curl -sL https://ja.osdn.net/dl/hengband/heng-graf-16x16.tar.gz | tar zxC /usr/share/games/hengband/lib/xtra/graf  && \
   mkdir -p /usr/share/fonts/noto && \
   curl -sLO https://github.com/googlefonts/noto-cjk/releases/download/Sans2.004/11_NotoSansMonoCJKjp.zip && \
   unzip 11_NotoSansMonoCJKjp.zip -d /usr/share/fonts/noto && \
@@ -25,6 +25,8 @@ RUN \
 
 ENV ANGBAND_X11_FONT=monospace DISPLAY=host.docker.internal:0
 #ENV XMODIFIERS=@im=kinput2
+
+USER games
 
 VOLUME /root/.angband/Hengband
 VOLUME /usr/share/games/hengband/lib/bone
